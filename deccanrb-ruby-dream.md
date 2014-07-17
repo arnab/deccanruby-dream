@@ -552,8 +552,42 @@ watch one one of my videos.
 
 ## Elixir/Erlang Processes
 
-* Processes are _very very_ light-weight
+Processes are _very very_ light-weight
 
 ^Show how light they are.
 100, 10_000, 100_0000 processes
 Then 1000_000 with +P
+
+---
+
+## Elixir/Erlang Processes
+
+Processes are _very very_ light-weight
+
+fault-tolerance: **let it crash**
+
+^ Riak, WhatsApp
+
+---
+
+## Elixir/Erlang Processes
+
+Processes are _very very_ light-weight
+
+fault-tolerance: **let it crash**
+
+OTP framework + Elixir's dynamic nature
+
+---
+
+## Elixir/Erlang Processes
+
+Processes are _very very_ light-weight
+
+fault-tolerance: **let it crash**
+
+OTP framework + Elixir's dynamic nature
+
+Distributed
+
+^ DCell: Over 0mq
