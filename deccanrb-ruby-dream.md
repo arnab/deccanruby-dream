@@ -1,16 +1,12 @@
 ![650%](http://f.cl.ly/items/323l2x0G2d2d2a1r381x/requiem_for_a_dream.jpg)
 
----
-
-## @arnab_deka
-
 ^ Live in Bangalore
 
 ---
 
 ![fit](http://2.bp.blogspot.com/-x21Y6ZOGU4w/UFjaXpxRPtI/AAAAAAAAAG0/RnIeoFcwY9M/s1600/Pune-136aa.jpg)
 
-^ First job, first bike, first serious relationship.
+^ First job, first bike, first bike accident, first serious relationship.
 
 ---
 
@@ -31,6 +27,57 @@ into Ruby.
 ---
 
 # [fit] Tail Call Optimzation
+
+^ What is TCO? function call in tail position, can replace the
+stack frame, avoiding stack overflow and making it fast.
+
+---
+
+## TCO
+
+```ruby
+                  def bar(n)
+                    foo(n-1)
+                  end
+
+                  def foo(n)
+                    raise "boom" if n <= 7
+                    bar(n - 1)
+                  end
+```
+
+---
+
+## TCO
+
+_foo(15)_
+
+---
+
+## TCO
+
+```
+          tail_rec.rb:8:in `foo': boom (RuntimeError)
+          		from tail_rec.rb:4:in `bar'
+          		from tail_rec.rb:9:in `foo'
+          		from tail_rec.rb:4:in `bar'
+          		from tail_rec.rb:9:in `foo'
+          		from tail_rec.rb:4:in `bar'
+          		from tail_rec.rb:9:in `foo'
+          		from tail_rec.rb:4:in `bar'
+          		from tail_rec.rb:9:in `foo'
+          		from tail_rec.rb:12:in `<main>'
+```
+
+---
+
+## TCO
+
+```
+          <compiled>:2:in 'foo': boom (RuntimeError)
+           		from tail_rec.rb:25:in 'eval'
+           		from tail_rec.rb:25:in '<main>'
+```
 
 ---
 
@@ -168,7 +215,8 @@ into Ruby.
 ```
 
 ^ Demo
-^ Talk about JRuby and mention Clojure/Scala
+
+^ Practical? Recursive elegant solutions.
 
 ---
 
@@ -466,31 +514,211 @@ Feature Request **#8895**
 
 ---
 
+![fit](http://f.cl.ly/items/1V1Q213I2B3d111Z0u3U/Screen%20Shot%202014-07-18%20at%2019.32.03%20pm.png)
+
+---
+
 # [fit] Higher Order Functions
 
 ---
 
 ## HOFs in Ruby?
 
-ref to a method, blocks
+```ruby
+                drinks.map { |d| d.gulp! }
+
+
+                add = lambda { |a,b| a + b }
+                add.call(1,3) # => 4
+```
+
+^ So we have lambdas or blocks. And they are one of the most beautiful
+parts of Ruby. And this is what had me hooked on, initially, coming
+from Java.
+
+---
+
+## HOFs in Ruby?
+
+```ruby
+                  m = 1.method(:+)
+                    # => #<Method: Fixnum#+>
+```
+
+^ We can get a handle on methods
+
+---
+
+## HOFs in Ruby?
+
+```ruby
+                  m.class.name # => Method
+
+                  m.methods.size # => 66
+```
+
+^ and can ask it questions, just like any object.
+
+---
+
+## HOFs in Ruby?
+
+But they are not **_first class_**:
+
+```ruby
+              drinks.map(gulp!) # nope
+
+
+              drinks.map { |d| d.gulp! } # yep
+```
+
+^ Can't pass them around directly. There are weird tricks, like wrapping in
+a Proc, but methods are basically not first class objects. Unlike
+almost everything else in Ruby is.
+
+^ So what can HOFs help with?
 
 ---
 
 ## Currying
 
+^ Supplying less than the required number of args to a method
+^ Which returns another method, that only requires the remaining args
+
+---
+
+## Currying
+
+```clojure
+                     (* 5 2) ; 10
+```
+
+---
+
+## Currying
+
+```clojure
+                     (* 5 2) ; 10
+
+                     (partial * 5)
+                       ; #<core$partial$fn__4228 ...>
+```
+
+---
+
+## Currying
+
+Clojure's map function:
+
+```clojure
+                  (map fn collection)
+```
+
+---
+
+## Currying
+
+```clojure
+                   (map (fn [n] * 5 n)
+                        [1 2 3 4 5])
+
+                     ; (5 10 15 20 25)
+```
+
+---
+
+## Currying
+
+```clojure
+                   (map (partial * 5)
+                        [1 2 3 4 5])
+
+                     ; (5 10 15 20 25)
+```
+
+^ Leads to very reusable functions
+
+---
+
+## Currying Ruby?
+
+```ruby
+              mult = lambda { |a,b| a * b }
+                # => #<Proc ...>
+
+              times_five = mult.curry[5]
+                # => #<Proc ...>
+```
+
+^ We can indeed curry lamdas (not methods, mind you)
+
+---
+
+## Currying Ruby?
+
+```ruby
+                times_five[10]
+                  # => 50
+
+                [1,2,3,4,5].map(&times_five)
+                  # => [5, 10, 15, 20, 25]
+```
+
+^ But, mind-bending. Hence you don't see it IRL.
+
 ---
 
 ## Composition
 
+```ruby
+                def present?(word)
+                  ! blank?(word)
+                end
+
+                words.select { |w| present?(w) }
+```
+
 ---
 
-## HOFs
+## Composition
 
-`(comp not blank?)`
+`select` => `filter`
+`filter fn collection`
 
 ---
 
-## HOFs
+## Composition
+
+```clojure
+              (defn present? [str]
+                (not (blank? str)))
+
+              (filter present? words)
+```
+
+^ Example: filtering (select) non-blank words
+
+---
+
+## Composition
+
+```clojure
+              (filter #(not (blank? %1))
+                      words)
+```
+
+---
+
+## Composition
+
+```clojure
+              (filter (comp not blank?)
+                      words)
+```
+
+---
+
+## HOFs in real life
 
 Logger
 
