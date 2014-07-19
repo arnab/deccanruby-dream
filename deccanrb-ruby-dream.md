@@ -497,13 +497,11 @@ and
 ## Deep destructuring
 
 ```clojure
-          (loop [[[name year & more] & more-dogs]
+          (loop [[[name year & {:keys [breed location]}] & more-dogs]
                  famous-dogs]
-            (let [{:keys [breed location]}
-                  (apply hash-map more)]
-              (prn (format
-                    "%s is a %s, born in %d in %s."
-                    name breed year location)))
+            (prn (format
+                  "%s is a %s, born in %d in %s."
+                  name breed year location))
             (if (seq more-dogs) (recur more-dogs)))
 
           ;; snowy is a fox terrier, born in 1929 in Belgium.
