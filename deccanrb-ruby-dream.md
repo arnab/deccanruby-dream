@@ -1,24 +1,37 @@
 ![650%](http://f.cl.ly/items/323l2x0G2d2d2a1r381x/requiem_for_a_dream.jpg)
 
-^ Live in Bangalore
+^ You all are already hooked on to Ruby right? I'll show you some more
+exotic things out there, using different languages. And I'll show you
+how you can get your hands on them right now, using Ruby.
+
+^ BTW, how many of you have seen this movie? It was the saddest, most
+depressing movie I have ever experienced. But don't worry, the talk
+won't be like that.
 
 ---
 
 ![fit](http://2.bp.blogspot.com/-x21Y6ZOGU4w/UFjaXpxRPtI/AAAAAAAAAG0/RnIeoFcwY9M/s1600/Pune-136aa.jpg)
 
-^ First job, first bike, first bike accident, first serious relationship.
+^ First job, first bike, ... first bike accident.
 
 ---
 
 ![](http://modernfarmer.com/wp-content/uploads/2014/03/water-buff-hero1.jpg)
 
+^ Jagtap Diary
+
 ---
 
 ![fit](http://chaneyarchitects.com/wp-content/uploads/2013/03/Amar-Renaissance-view-of-building-A-B-C-700x466.jpg)
 
+^ Now?
+
 ---
 
 ![fit](http://f.cl.ly/items/2Z2n2b0S0S1X0E3k2w3X/Screen%20Shot%202014-07-17%20at%2011.08.30%20am.png)
+
+^ Nilenso is a kickass consulting company, based in Bangalore. We work
+mainly on Clojure and Ruby.
 
 ^ Work on Clojure. Also play with Elixir and everything else.
 ^ This talk brings some of the inspirations from those technologies
@@ -133,9 +146,9 @@ _foo(15)_
 ## Fibonnacci
 
 ```ruby
-                def fib(n)
-                  n.zero? ? 1 : (n * fib(n-1))
-                end
+            def fib(n)
+              n.zero? ? 1 : (n * fib(n-1))
+            end
 ```
 
 ---
@@ -143,7 +156,7 @@ _foo(15)_
 ## Fibonnacci
 
 ```ruby
-                      n * fib(n-1)
+                 n * fib(n-1)
 ```
 
 ^ Demo: 8733
@@ -159,9 +172,9 @@ _foo(15)_
 ## Fibonnacci
 
 ```ruby
-                def fib(n, acc=1)
-                  n.zero? ? acc : fib(n-1, n*acc)
-                end
+          def fib(n, acc=1)
+            n.zero? ? acc : fib(n-1, n*acc)
+          end
 ```
 
 ---
@@ -169,7 +182,7 @@ _foo(15)_
 ## Fibonnacci
 
 ```ruby
-                    fib(n-1, n*acc)
+                fib(n-1, n*acc)
 ```
 
 ^ Demo: 8733
@@ -227,10 +240,10 @@ _foo(15)_
 ## in Ruby
 
 ```ruby
-              a, b, c, d = [1 200 32 65.45]
+            a, b, c, d = [1 200 32 65.45]
 
 
-              first, *rest = [1 200 32 65.45]
+            first, *rest = [1 200 32 65.45]
 ```
 
 ---
@@ -250,11 +263,11 @@ _foo(15)_
 ## Ruby: `splat`/`split`
 
 ```ruby
-                    def add(a,b)
-                      a + b
-                    end
+                def add(a,b)
+                  a + b
+                end
 
-                    add(*[1, 300])
+                add(*[1, 300])
 ```
 
 ---
@@ -290,17 +303,17 @@ _foo(15)_
 ## in Elixir
 
 ```elixir
-                      defmodule MyNums
-                        def sum([]) do
-                          0
-                        end
+              defmodule MyNums
+                def sum([]) do
+                  0
+                end
 
-                        def sum([hd|tl]) do
-                          hd + sum(tl)
-                        end
-                      end
+                def sum([hd|tl]) do
+                  hd + sum(tl)
+                end
+              end
 
-                      MyNums.sum([1,2,3,4,5)] # 15
+              MyNums.sum([1,2,3,4,5)] # 15
 ```
 
 ---
@@ -334,11 +347,11 @@ _foo(15)_
 ## But... in Elixir
 
 ```elixir
-                      iex> a = 1
-                      1
+                  iex> a = 1
+                  1
 
-                      iex> 1 = a
-                      1
+                  iex> 1 = a
+                  1
 ```
 
 ---
@@ -347,7 +360,7 @@ _foo(15)_
 
 
 ```elixir
-                      iex> 2 = a
+                  iex> 2 = a
 ```
 
 `(MatchError)`
@@ -401,10 +414,6 @@ syntax sugar
 
 ^ And not only this you can match in any data structure, be it a
 ^ list/map/set or a mix of all that
-
-^ Think how clutter-free Rails options hash parsing would become.
-
-^ In fact this is so common
 
 ---
 
@@ -525,11 +534,11 @@ Feature Request **#8895**
 ## HOFs in Ruby?
 
 ```ruby
-                drinks.map { |d| d.gulp! }
+              drinks.map { |d| d.gulp! }
 
 
-                add = lambda { |a,b| a + b }
-                add.call(1,3) # => 4
+              add = lambda { |a,b| a + b }
+              add.call(1,3) # => 4
 ```
 
 ^ So we have lambdas or blocks. And they are one of the most beautiful
@@ -541,8 +550,8 @@ from Java.
 ## HOFs in Ruby?
 
 ```ruby
-                  m = 1.method(:+)
-                    # => #<Method: Fixnum#+>
+              m = 1.method(:+)
+                # => #<Method: Fixnum#+>
 ```
 
 ^ We can get a handle on methods
@@ -552,9 +561,9 @@ from Java.
 ## HOFs in Ruby?
 
 ```ruby
-                  m.class.name # => Method
+              m.class.name # => Method
 
-                  m.methods.size # => 66
+              m.methods.size # => 66
 ```
 
 ^ and can ask it questions, just like any object.
@@ -566,10 +575,10 @@ from Java.
 But they are not **_first class_**:
 
 ```ruby
-              drinks.map(gulp!) # nope
+          drinks.map(gulp!) # nope
 
 
-              drinks.map { |d| d.gulp! } # yep
+          drinks.map { |d| d.gulp! } # yep
 ```
 
 ^ Can't pass them around directly. There are weird tricks, like wrapping in
@@ -590,7 +599,7 @@ almost everything else in Ruby is.
 ## Currying
 
 ```clojure
-                     (* 5 2) ; 10
+               (* 5 2) ; 10
 ```
 
 ---
@@ -598,31 +607,20 @@ almost everything else in Ruby is.
 ## Currying
 
 ```clojure
-                     (* 5 2) ; 10
+               (* 5 2) ; 10
 
-                     (partial * 5)
-                       ; #<core$partial$fn__4228 ...>
+               (partial * 5)
+                 ; #<core$partial$fn__4228 ...>
 ```
 
 ---
 
 ## Currying
 
-Clojure's map function:
+Clojure's _map_ function:
 
 ```clojure
-                  (map fn collection)
-```
-
----
-
-## Currying
-
-```clojure
-                   (map (fn [n] * 5 n)
-                        [1 2 3 4 5])
-
-                     ; (5 10 15 20 25)
+              (map fn collection)
 ```
 
 ---
@@ -630,10 +628,21 @@ Clojure's map function:
 ## Currying
 
 ```clojure
-                   (map (partial * 5)
-                        [1 2 3 4 5])
+               (map (fn [n] * 5 n)
+                    [1 2 3 4 5])
 
-                     ; (5 10 15 20 25)
+                 ; (5 10 15 20 25)
+```
+
+---
+
+## Currying
+
+```clojure
+               (map (partial * 5)
+                    [1 2 3 4 5])
+
+                 ; (5 10 15 20 25)
 ```
 
 ^ Leads to very reusable functions
@@ -718,15 +727,79 @@ Clojure's map function:
 
 ---
 
-## HOFs in real life
+## HOFs
 
-Logger
+In the real world: ring
 
 ---
 
 ## HOFs
 
-Ring middleware example
+rack == ring
+
+---
+
+## HOFs
+
+rack == ring
+
+request/response: simple data structures
+
+---
+
+## HOFs
+
+rack == ring
+
+request/response: simple data structures
+
+middleware are just functions
+
+---
+
+## HOFs: rack middleware
+
+```ruby
+    class ResponseTimer
+      def initialize
+        # ...
+      end
+
+      def call
+        # ...
+      end
+    end
+
+    config.middleware.use "ResponseTimer"
+```
+
+^ A seperate class and an API to add middleware
+
+---
+
+## HOFs: ring middlware
+
+```clojure
+    (wrap-ssl-redirect
+      (wrap-not-modified
+        (wrap-request-logging
+          (wrap-token-authentication
+            (wrap-params app)))))
+```
+
+---
+
+## HOFs: ring middleware
+
+```clojure
+    (defn wrap-ssl-redirect
+      [handler & ...]
+      (fn [request]
+        (if (= (:scheme request) :https)
+          (handler request)
+          (-> (resp/redirect ... )
+              (resp/status ...)))))
+```
 
 ---
 
@@ -819,3 +892,12 @@ OTP framework + Elixir's dynamic nature
 Distributed
 
 ^ DCell: Over 0mq
+
+---
+
+# [fit] Keep
+# [fit] **Experimenting!!**
+
+---
+
+# [fit] आभारी आहे
