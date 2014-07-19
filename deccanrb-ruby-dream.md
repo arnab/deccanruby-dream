@@ -156,7 +156,7 @@ _foo(15)_
 ## Fibonnacci
 
 ```ruby
-                 n * fib(n-1)
+                      n * fib(n-1)
 ```
 
 ^ Demo: 8733
@@ -182,7 +182,7 @@ _foo(15)_
 ## Fibonnacci
 
 ```ruby
-                fib(n-1, n*acc)
+                    fib(n-1, n*acc)
 ```
 
 ^ Demo: 8733
@@ -240,10 +240,12 @@ _foo(15)_
 ## in Ruby
 
 ```ruby
-            a, b, c, d = [1 200 32 65.45]
+            a, b, c, d = [1, 200, 32, 65.45]
 
 
-            first, *rest = [1 200 32 65.45]
+            first, *rest = [1, 200, 32, 65.45]
+
+            def foo(a: 1, b: 2); end
 ```
 
 ---
@@ -575,10 +577,10 @@ from Java.
 But they are not **_first class_**:
 
 ```ruby
-          drinks.map(gulp!) # nope
+              drinks.map(gulp!) # nope
 
 
-          drinks.map { |d| d.gulp! } # yep
+              drinks.map { |d| d.gulp! } # yep
 ```
 
 ^ Can't pass them around directly. There are weird tricks, like wrapping in
@@ -599,7 +601,7 @@ almost everything else in Ruby is.
 ## Currying
 
 ```clojure
-               (* 5 2) ; 10
+                     (* 5 2) ; 10
 ```
 
 ---
@@ -607,10 +609,10 @@ almost everything else in Ruby is.
 ## Currying
 
 ```clojure
-               (* 5 2) ; 10
+                     (* 5 2) ; 10
 
-               (partial * 5)
-                 ; #<core$partial$fn__4228 ...>
+                     (partial * 5)
+                       ; #<core$partial$fn__4228 ...>
 ```
 
 ---
@@ -620,7 +622,7 @@ almost everything else in Ruby is.
 Clojure's _map_ function:
 
 ```clojure
-              (map fn collection)
+                  (map fn collection)
 ```
 
 ---
@@ -760,17 +762,17 @@ middleware are just functions
 ## HOFs: rack middleware
 
 ```ruby
-    class ResponseTimer
-      def initialize
-        # ...
-      end
+            class ResponseTimer
+              def initialize
+                # ...
+              end
 
-      def call
-        # ...
-      end
-    end
+              def call
+                # ...
+              end
+            end
 
-    config.middleware.use "ResponseTimer"
+            config.middleware.use "ResponseTimer"
 ```
 
 ^ A seperate class and an API to add middleware
@@ -900,4 +902,4 @@ Distributed
 
 ---
 
-# [fit] आभारी आहे
+# [fit] धन्यवाद
